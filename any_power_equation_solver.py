@@ -78,8 +78,6 @@ def run_equation_solver():
     print(f'Ваше уравнение: {equation} = 0')
     while True:
         solve_equation(equation)
-        print(equation.k1)
-        print(equation.k2)
         response = input('Переопределить границы и точность? (y/n) ')
         if response.strip().lower() not in POSITIVE_RESPONSES:
             break

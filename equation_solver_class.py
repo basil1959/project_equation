@@ -56,7 +56,7 @@ class EquationSolver:
 
         elif self.no_solution():
 
-            print(f'Решения в данной области нет. На концах отрезка '
+            print(f'Неудачно выбрана область поиска. На концах отрезка '
                   f'[{self.border_1}; {self.border_2}] '
                   f'функция {str(self)} принимает значения '
                   f'одного знака соответственно {self.border_values[0]:.2f} '
