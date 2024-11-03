@@ -2,7 +2,7 @@ from equation_solver_class import EquationSolver
 from input_exceptions import UserInputError
 
 
-COEFF_MESSAGE = ('Введите коэффициенты a0, a1 ... aN для уравнения вида: '
+COEFF_MESSAGE = ('Введите коэффициенты a0, a1, ..., aN для уравнения вида: '
                  '"a0*x**0 + a1*x**1 + ... + aN*x**N" через пробел:\n')
 BORDER_MESSAGE = 'Введите границы области поиска через пробел:\n'
 POSITIVE_RESPONSES = ('y', 'yes', 'д', 'да')
@@ -38,10 +38,8 @@ def get_borders():
             print('Введите только числовые значения!')
             continue
         except UserInputError:
-            print('Границ должно быть только две!')
-            continue
-        except UserInputError:
-            print('Первое число должно быть меньше второго!')
+            print('Границ должно быть только две, причём')
+            print('первое число должно быть меньше второго!')
             continue
         else:
             break
@@ -53,13 +51,15 @@ def get_accuracy(borders):
         try:
             accuracy = float(input('Введите желаемую точность '
                                    '(например, "0.001"):\n').strip())
+            if accuracy <= 0:
+                raise UserInputError
             if accuracy/(borders[1] - borders[0]) > 0.1:
                 raise UserInputError
         except ValueError:
             print('Введите значение типа "float" (например, "0.001")!')
             continue
         except UserInputError:
-            print('Слишком грубая точность!')
+            print('Неправильно задана точность!')
         else:
             break
     return accuracy
@@ -78,6 +78,8 @@ def run_equation_solver():
     print(f'Ваше уравнение: {equation} = 0')
     while True:
         solve_equation(equation)
+        print(equation.k1)
+        print(equation.k2)
         response = input('Переопределить границы и точность? (y/n) ')
         if response.strip().lower() not in POSITIVE_RESPONSES:
             break

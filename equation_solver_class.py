@@ -36,15 +36,15 @@ class EquationSolver:
             self.x = f'x = {self.border_2}'
             return True
 
-    def find_x(self, accuracy=0.001):
-        x1, x2 = self.border_values
+    def find_x(self, accuracy):
+        x1, x2 = self.borders
         while abs(x1 - x2) > accuracy:
             self.x = (x1 + x2) / 2
             if self.calculate_polynomial(self.x) * self.k1 > 0:
                 x1 = self.x
             else:
                 x2 = self.x
-
+    
         self.f_x = self.calculate_polynomial(self.x)
 
     def solve(self, accuracy):
